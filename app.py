@@ -87,7 +87,7 @@ def load_rag_pipeline():
         st.info("Generation modeli (Gemini) ve Temel Retriever kuruluyor...")
         llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.7, top_p=0.85)
 
-        base_retriever = vector_store.as_retriever(search_kwargs={'k': 5})
+        base_retriever = vector_store.as_retriever(search_kwargs={'k': 10})
 
         rag_pipeline = RetrievalQA.from_chain_type(
             llm=llm,
