@@ -90,41 +90,28 @@ def load_rag_pipeline():
              # Veritabanını kalıcı hale getirmeyelim, her çalıştığında yeniden oluştursun
             vector_store = Chroma.from_documents(documents, embeddings)
 
-        # Adım 6: Self-Querying Retriever Kurulumu
-        with st.spinner("🤖 Generation modeli (Gemini) ve Self-Querying Retriever kuruluyor..."):
-            llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0)
+        # === ADIM 6: LLM ve Basit Retriever (Filtreleme Sonra Yapılacak) ===
+        st.info("Generation modeli (Gemini) ve Temel Retriever kuruluyor...")
+        llm = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.7, top_p=0.85) # Sıcaklığı biraz artırdık
 
-            metadata_field_info = [
-                AttributeInfo(
-                    name="source",
-                    description="Tarifin başlığı, örneğin 'Başlık: Karnıyarık' veya 'Başlık: Menemen'",
-                    type="string",
-                ),
-            ]
-            document_content_description = "Türk mutfağı yemek tarifleri"
+        # Self-Querying yerine, önce basit bir retriever (k=5 ile) tanımlıyoruz.
+        # Filtrelemeyi RAG zincirine bırakacağız (daha az verimli ama çalışmalı)
+        # VEYA filtrelemeyi manuel yapacağız. Şimdilik basit tutalım:
+        base_retriever = vector_store.as_retriever(search_kwargs={'k': 5})
 
-            retriever = SelfQueryRetriever.from_llm(
-                llm,
-                vector_store,
-                document_content_description,
-                metadata_field_info,
-                verbose=False # Deploy'da logları kapatıyoruz
-            )
-
-        # Adım 7: RAG Pipeline
+        # === ADIM 7: RetrievalQA Zinciri ===
         rag_pipeline = RetrievalQA.from_chain_type(
             llm=llm,
-            chain_type="stuff",
-            retriever=retriever
+            chain_type="stuff", # Bulunan 5 belgeyi birleştirip LLM'e gönder
+            retriever=base_retriever # k=5 ayarlı basit retriever'ı kullan
         )
-
-        #st.success("Chatbot hazır! Tarif sormaya başlayabilirsiniz.") # Spinner bitince zaten hazır olacak
+        st.success("Chatbot (Basit Retriever k=5 ile) hazır!") # Hazır mesajını güncelledik
         return rag_pipeline
 
-    except Exception as e:
-        st.error(f"RAG Pipeline yüklenirken hata oluştu: {e}")
-        st.exception(e) # Detaylı hata gösterimi için
-        return None
+except Exception as e:
+    st.error(f"RAG Pipeline yüklenirken hata oluştu: {e}")
+    st.exception(e) # Detaylı hata gösterimi için
+    return None
 
 # RAG Pipeline'ı yükle (Spinner içinde gösterelim)
 with st.spinner("⏳ Chatbot hazırlanıyor, lütfen bekleyin... Bu işlem biraz zaman alabilir."):
