@@ -43,37 +43,63 @@ except Exception as e:
 def load_rag_pipeline_self_query():
     """
     Veri setini yükler, RAG mimarisini (SelfQueryRetriever ile) kurar.
+    Akıllı parçalama mantığı içerir.
     """
     try:
         with st.spinner("🔄 Veri seti GitHub'dan çekiliyor..."):
             os.system("rm -rf akbank-genai-bootcamp-proje")
             os.system("git clone https://github.com/mustafadevrim/akbank-genai-bootcamp-proje")
 
-        with st.spinner("🥣 Tarifler yükleniyor ve KONTEKST ENJEKSİYONU ile parçalanıyor..."):
+        with st.spinner("🥣 Tarifler yükleniyor ve AKILLI PARÇALAMA ile işleniyor..."):
             with open("akbank-genai-bootcamp-proje/tarifler.txt", "r", encoding="utf-8") as f:
                 tum_tarifler_metni = f.read()
 
             tarif_listesi = tum_tarifler_metni.split("\n---\n")
             documents = []
+            basariyla_parcalanan_tarif_sayisi = 0
+
             for tarif_metni in tarif_listesi:
                 if not tarif_metni.strip(): continue
-                parts = tarif_metni.split("\nMalzemeler:\n", 1)
-                if len(parts) < 2: continue
-                baslik_content = parts[0].strip()
-                parts2 = parts[1].split("\nYapılışı:\n", 1)
-                if len(parts2) < 2: continue
-                malzemeler_content = parts2[0].strip()
-                yapilis_content = parts2[1].strip()
 
-                # Self-Querying için metadata'yı DÜZGÜN tanımlıyoruz
+                # Önce Başlığı Ayır
+                baslik_parts = tarif_metni.split("\nMalzemeler:\n", 1)
+                if len(baslik_parts) < 2:
+                    st.warning(f"Format hatası (Malzemeler bulunamadı): {tarif_metni[:50]}...")
+                    continue
+                baslik_content = baslik_parts[0].strip()
+
+                # Sonra Yapılışı Ayır (Metnin sonundan başlayarak)
+                yapilis_parts = tarif_metni.split("\nYapılışı:\n", 1)
+                if len(yapilis_parts) < 2:
+                    st.warning(f"Format hatası (Yapılışı bulunamadı): {baslik_content}")
+                    continue
+                yapilis_content = yapilis_parts[1].strip()
+
+                # Başlık ile Yapılışı arasında kalan her şeyi Malzemeler (+ ara bölümler) olarak al
+                malzemeler_ve_arasi_content = baslik_parts[1].split("\nYapılışı:\n", 1)[0].strip()
+
+                # Şimdi 3 chunk'ı doğru içerikle oluşturalım
                 doc_metadata = {"source": baslik_content}
 
+                # Chunk 1: Sadece Başlık
                 documents.append(Document(page_content=baslik_content, metadata=doc_metadata))
-                documents.append(Document(page_content=f"{baslik_content}\nMalzemeler:\n{malzemeler_content}", metadata=doc_metadata))
-                documents.append(Document(page_content=f"{baslik_content}\nYapılışı:\n{yapilis_content}", metadata=doc_metadata))
 
+                # Chunk 2: Başlık + Malzemeler (ve ara bölümler)
+                documents.append(Document(
+                    page_content=f"{baslik_content}\nMalzemeler:\n{malzemeler_ve_arasi_content}",
+                    metadata=doc_metadata
+                ))
+
+                # Chunk 3: Başlık + Yapılışı
+                documents.append(Document(
+                    page_content=f"{baslik_content}\nYapılışı:\n{yapilis_content}",
+                    metadata=doc_metadata
+                ))
+                basariyla_parcalanan_tarif_sayisi += 1
+
+            st.info(f"{basariyla_parcalanan_tarif_sayisi} tarif başarıyla {len(documents)} parçaya bölündü.")
             if not documents:
-                st.error("Veri seti parçalanamadı veya tarifler.txt boş.")
+                st.error("Hiçbir tarif parçalanamadı veya tarifler.txt boş.")
                 return None
 
         with st.spinner("🧠 Embedding modeli (MiniLM) yükleniyor..."):
@@ -84,7 +110,6 @@ def load_rag_pipeline_self_query():
             vector_store = Chroma.from_documents(documents, embeddings)
 
         with st.spinner("🤖 Generation modeli (Gemini) ve Self-Querying Retriever kuruluyor..."):
-            # Self-Querying için daha düşük sıcaklıkta (daha az yaratıcı) bir LLM kullanmak daha iyi olabilir
             llm_for_retriever = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0)
 
             metadata_field_info = [
@@ -97,21 +122,19 @@ def load_rag_pipeline_self_query():
             document_content_description = "Türk mutfağı yemek tarifleri"
 
             retriever = SelfQueryRetriever.from_llm(
-                llm_for_retriever, # Filtre oluşturmak için kullanılacak LLM
+                llm_for_retriever,
                 vector_store,
                 document_content_description,
                 metadata_field_info,
-                verbose=False # Deploy'da logları kapatıyoruz
+                verbose=False
             )
 
-        # Cevap üretimi için kullanılacak LLM (biraz daha yaratıcı olabilir)
         llm_for_qa = ChatGoogleGenerativeAI(model="models/gemini-flash-latest", temperature=0.7, top_p=0.85)
 
-        # RetrievalQA zincirini SelfQueryRetriever ile kuruyoruz
         rag_pipeline = RetrievalQA.from_chain_type(
-            llm=llm_for_qa, # Cevap üretecek LLM
+            llm=llm_for_qa,
             chain_type="stuff",
-            retriever=retriever # Akıllı SelfQueryRetriever'ı kullan
+            retriever=retriever
         )
 
         return rag_pipeline
@@ -122,7 +145,7 @@ def load_rag_pipeline_self_query():
         return None
 
 # RAG Pipeline'ı yükle
-with st.spinner("⏳ Chatbot hazırlanıyor (Self-Querying ile)... Lütfen bekleyin..."):
+with st.spinner("⏳ Chatbot hazırlanıyor (Self-Querying & Akıllı Parçalama ile)... Lütfen bekleyin..."):
     rag_chain = load_rag_pipeline_self_query()
 
 
@@ -146,7 +169,6 @@ if rag_chain is not None:
         with st.chat_message("assistant"):
             with st.spinner("🤔 Tarif aranıyor (Self-Querying ile) ve cevap oluşturuluyor..."):
                 try:
-                    # RAG zincirini çalıştır (SelfQueryRetriever arka planda çalışacak)
                     response = rag_chain.invoke(prompt)
                     cevap = response['result']
                     st.markdown(cevap)
