@@ -4,3 +4,6 @@ langchain
 faiss-cpu
 langchain_community
 streamlit
+sentence-transformers
+langchain-chroma
+lark
