@@ -152,7 +152,7 @@ if rag_chain is not None:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    if prompt := st.chat_input("Örn: Künefe nasıl yapılır?"):
+    if prompt := st.chat_input("Örn: Karnıyarık nasıl yapılır? Malzemeleri nelerdir?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
