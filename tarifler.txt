@@ -29,9 +29,9 @@ Malzemeler:
 - Maydanoz
 - Tuz, karabiber
 - Kızartmak için sıvı yağ
-Sosu için:
-- 1 yemek kaşığı domates salçası
-- 2 su baradğı sıcak su
+- Sosu için:
+  - 1 yemek kaşığı domates salçası
+  - 2 su bardağı sıcak su
 Yapılışı:
 1. Patlıcanları alacalı soyun ve tuzlu suda 30 dakika bekleterek acısını alın. Kurulayın.
 2. Patlıcanları kızgın yağda her tarafı yumuşayana kadar kızartın ve fazla yağını alması için kağıt havlu üzerine alın.
@@ -41,7 +41,7 @@ Yapılışı:
 6. Baharatları ve ince kıyılmış maydanozu ekleyip karıştırın. Harcı ocaktan alın.
 7. Patlıcanların ortasını bıçakla çizin ve içlerini bu harçla doldurun.
 8. Patlıcanları bir fırın tepsisine dizin.
-9. Sosu için salça ve sıcak suyu karıştırıp tepsiye dökün.
+9. Sosu hazırlamak için salça ve sıcak suyu karıştırıp tepsiye dökün.
 10. Önceden ısıtılmış 180 derece fırında yaklaşık 30 dakika pişirin.
 
 ---
@@ -72,20 +72,20 @@ Yapılışı:
 
 Başlık: Hünkar Beğendi
 Malzemeler:
-Beğendi için:
-- 4 adet közlenmiş patlıcan
-- 1.5 su bardağı süt
-- 1.5 yemek kaşığı un
-- 1 yemek kaşığı tereyağı
-- Yarım su bardağı rendelenmiş kaşar peyniri
-- Tuz, karabiber
-Tas Kebabı için:
-- 500 gram kuşbaşı kuzu eti (veya dana eti)
-- 1 adet soğan
-- 1 yemek kaşığı domates salçası
-- 1 yemek kaşığı tereyağı
-- 2 su bardağı sıcak su
-- Tuz, karabiber
+- Beğendi için:
+  - 4 adet közlenmiş patlıcan
+  - 1.5 su bardağı süt
+  - 1.5 yemek kaşığı un
+  - 1 yemek kaşığı tereyağı
+  - Yarım su bardağı rendelenmiş kaşar peyniri
+  - Tuz, karabiber
+- Tas Kebabı için:
+  - 500 gram kuşbaşı kuzu eti (veya dana eti)
+  - 1 adet soğan
+  - 1 yemek kaşığı domates salçası
+  - 1 yemek kaşığı tereyağı
+  - 2 su bardağı sıcak su
+  - Tuz, karabiber
 Yapılışı:
 1. Tas Kebabı için: Eti bir tencereye alın ve suyunu çekene kadar kavurun.
 2. Tereyağını ve ince doğranmış soğanı ekleyip soğanlar pembeleşene kadar kavurun.
@@ -112,7 +112,7 @@ Malzemeler:
 - 1 tatlı kaşığı tarçın (isteğe bağlı)
 - 1 adet limon (veya nar ekşisi)
 - Tuz, karabiber, yenibahar
-- 3 su bardağı sıcak su
+- 3 su bardağı sıcak su (pişirmek için)
 Yapılışı:
 1. Salamura yaprak kullanıyorsanız, tuzunu alması için ılık suda bekletin ve yıkayın. Taze yaprak ise kaynar suda hafifçe haşlayın.
 2. İç harcı için: Soğanları incecik doğrayın.
@@ -134,12 +134,12 @@ Malzemeler:
 - 300 gram tel kadayıf
 - 200 gram künefe peyniri (veya tuzsuz dil peyniri)
 - 150 gram tereyağı
-Şerbeti için:
-- 2 su bardağı şeker
-- 2 su bardağı su
-- Birkaç damla limon suyu
-Üzeri için:
-- Toz Antep fıstığı veya kaymak
+- Şerbeti için:
+  - 2 su bardağı şeker
+  - 2 su bardağı su
+  - Birkaç damla limon suyu
+- Üzeri için:
+  - Toz Antep fıstığı veya kaymak
 Yapılışı:
 1. Önce şerbeti hazırlayın: Şeker ve suyu tencereye alın. Kaynamaya başlayınca limonu sıkın ve 10-15 dakika daha kaynatıp soğumaya bırakın. Künefe sıcak, şerbet soğuk olmalıdır.
 2. Tel kadayıfı elinizle küçük parçalara ayırın (tiftikleyin).
@@ -203,22 +203,22 @@ Yapılışı:
 
 Başlık: İçli Köfte
 Malzemeler:
-Dış Harcı İçin:
-- 2 su bardağı ince bulgur (köftelik)
-- 1 su bardağı irmik
-- 1 adet yumurta
-- 1 yemek kaşığı biber salçası
-- 1 yemek kaşığı domates salçası
-- 3 su bardağı sıcak su
-- Tuz, kimyon
-İç Harcı İçin:
-- 300 gram kıyma
-- 2 adet soğan
-- 1 su bardağı çekilmiş ceviz içi
-- 2 yemek kaşığı tereyağı
-- Yarım demet maydanoz
-- Tuz, karabiber, pul biber
-Kızartmak için: Sıvı yağ
+- Dış Harcı İçin:
+  - 2 su bardağı ince bulgur (köftelik)
+  - 1 su bardağı irmik
+  - 1 adet yumurta
+  - 1 yemek kaşığı biber salçası
+  - 1 yemek kaşığı domates salçası
+  - 3 su bardağı sıcak su
+  - Tuz, kimyon
+- İç Harcı İçin:
+  - 300 gram kıyma
+  - 2 adet soğan
+  - 1 su bardağı çekilmiş ceviz içi
+  - 2 yemek kaşığı tereyağı
+  - Yarım demet maydanoz
+  - Tuz, karabiber, pul biber
+- Kızartmak için: Sıvı yağ
 Yapılışı:
 1. İç harcı için: Tereyağında kıymayı suyunu çekene kadar kavurun. İnce doğranmış soğanları ekleyip pembeleşene kadar kavurun.
 2. Baharatları, tuzu ve cevizi ekleyip karıştırın. Ocaktan alınca kıyılmış maydanozu ekleyin ve soğumaya bırakın (İç harcın donması için buzlukta bekletmek iyi bir yöntemdir).
@@ -237,10 +237,10 @@ Malzemeler:
 - 1 paket hazır baklavalık yufka (yaklaşık 40 adet)
 - 300 gram çekilmiş ceviz veya Antep fıstığı
 - 250 gram tereyağı
-Şerbeti için:
-- 4 su bardağı şeker
-- 5 su bardağı su
-- Yarım limonun suyu
+- Şerbeti için:
+  - 4 su bardağı şeker
+  - 5 su bardağı su
+  - Yarım limonun suyu
 Yapılışı:
 1. Şerbet için: Şeker ve suyu tencereye alın. Kaynamaya başlayınca limonu sıkın ve kısık ateşte 15-20 dakika (kıvam alana kadar) kaynatın. Soğumaya bırakın. Baklava sıcak, şerbet soğuk olacak.
 2. Tereyağını eritin ve üzerindeki köpükleri (tortuyu) alın.
