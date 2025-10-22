@@ -53,8 +53,8 @@ Chatbot'u canlı olarak test etmek için aşağıdaki linki ziyaret edebilirsini
 3.  Örnek Sorular:
     * "Mercimek çorbası nasıl yapılır?"
     * "Baklava malzemeleri nelerdir?"
-    * "İmam bayıldı tarifi verir misin?"
-    * "Künefe yapılışı"
+    * "Karnıyarık nasıl yapılır?"
+    * "Mercimek çorbası malzemeleri nelerdir?"
 4.  Enter'a basın ve chatbot'un size tarifi bulup getirmesini bekleyin.
 
 ---
